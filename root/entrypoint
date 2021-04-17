@@ -1,0 +1,15 @@
+#!/bin/sh
+PUID=${PUID:=1000}
+PGID=${PGID:=1000}
+
+# chown rTorrent specific directories
+chown -R "$PUID:$PGID" /config /session /watch /socket
+# chown log "files" so rTorrent can open them
+chown "$PUID:$PGID" \
+	/var/log/rtorrent-error.log \
+	/var/log/rtorrent-info.log
+
+chown -R "$PUID:$PGID" /var/www
+chown -R "$PUID:$PGID" /var/lib/nginx
+chown -R "$PUID:$PGID" /var/tmp/nginx
+
