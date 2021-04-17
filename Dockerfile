@@ -15,7 +15,7 @@ RUN set -xe && \
 #        apache2-utils \
 #        ca-certificates \
 #        libtorrent \
-        su-exec \
+#        su-exec \
         nginx \
         php7 \
         php7-fpm \
@@ -47,6 +47,8 @@ VOLUME /var/www/rutorrent/share
 
 EXPOSE 8890 80
 
-ENTRYPOINT ["/entrypoint"]
+CMD ["/entrypoint"]
 
-CMD ["supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]
+#ENTRYPOINT ["/entrypoint"]
+
+#CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
