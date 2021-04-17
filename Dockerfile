@@ -15,6 +15,7 @@ RUN set -xe && \
 #        apache2-utils \
 #        ca-certificates \
 #        libtorrent \
+        su-exec
         nginx \
         php7 \
         php7-fpm \
