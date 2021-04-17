@@ -48,4 +48,4 @@ EXPOSE 8890 80
 
 ENTRYPOINT ["/entrypoint"]
 
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]
