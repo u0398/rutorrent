@@ -7,8 +7,8 @@ ENV PUID \
     PGID
 
 RUN set -xe && \
-#    rm -rf /var/cache/apk/* && \
-#    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
     apk --no-cache add \
       --virtual .run-deps \
       php8 \
@@ -54,22 +54,17 @@ RUN set -xe && \
 
 COPY root /
 
-RUN chown -R ${PUID:-1000}.${GUID:-1000} \
-      /run /var/lib/nginx /var/log/nginx /var/www
-
-USER ${PUID:-1000}
-
 VOLUME /socket
 VOLUME /var/www/rutorrent/share
 
 EXPOSE 8890
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
 
 #CMD ["/entrypoint"]
 
-#ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/entrypoint"]
 
 #CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]

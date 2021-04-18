@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+[[ "$DEBUG" == "true" ]] && set -x
+
+chown -R ${PUID:=1000}:${PGID:=1000} \
+  /run /var/lib/nginx /var/log/nginx /var/www
+
+su ${PUID:=1000} --command " /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf"
