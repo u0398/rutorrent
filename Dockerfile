@@ -3,8 +3,8 @@ LABEL maintainer="u0398 <u0398@gmail.com>"
 
 ARG VERSION=3.10
 
-ENV PUID \
-    PGID
+#ENV PUID \
+#    PGID
 
 RUN set -xe && \
     rm -rf /var/cache/apk/* && \
@@ -52,23 +52,23 @@ RUN set -xe && \
     rm -rf /var/www/rutorrent/.git* && \
     rm /etc/nginx/conf.d/default.conf
 
-RUN chown -R 1000.1000 /var/www/rutorrent && \
-    chown -R 1000.1000 /run && \
-    chown -R 1000.1000 /var/lib/nginx && \
-    chown -R 1000.1000 /var/log/nginx
+#RUN chown -R 1000.1000 /var/www/rutorrent && \
+#    chown -R 1000.1000 /run && \
+#    chown -R 1000.1000 /var/lib/nginx && \
+#    chown -R 1000.1000 /var/log/nginx
 
 COPY root /
 
 VOLUME /socket
 VOLUME /var/www/rutorrent/share
 
-USER 1000
+#USER 1000
 
 EXPOSE 8890:80
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/conf.d/supervisord.conf"]
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/conf.d/supervisord.conf"]
 
-#ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/entrypoint"]
 
 #HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
 
