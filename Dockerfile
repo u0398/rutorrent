@@ -10,6 +10,12 @@ RUN set -xe && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
     apk --no-cache add \
+      --virtual .debug-deps \
+      bash \
+      coreutils \
+      grep \
+      sed && \
+    apk --no-cache add \
       --virtual .run-deps \
       php8 \
       php8-fpm \
