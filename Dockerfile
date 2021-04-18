@@ -70,5 +70,5 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/conf.d/supervisord.conf"]
 
 #ENTRYPOINT ["/entrypoint"]
 
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
+#HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
 
