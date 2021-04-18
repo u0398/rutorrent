@@ -53,7 +53,7 @@ RUN set -xe && \
     rm /etc/nginx/conf.d/default.conf
 
 RUN chown -R 1000.1000 \
-  /var/www/html /run /var/lib/nginx /var/log/nginx
+  /var/www/rutorrent /run /var/lib/nginx /var/log/nginx
 
 COPY root /
 
