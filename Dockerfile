@@ -54,17 +54,16 @@ RUN set -xe && \
 
 COPY root /
 
+USER 1000
+
 VOLUME /socket
 VOLUME /var/www/rutorrent/share
 
-EXPOSE 8890
+EXPOSE 8890:80
 
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+#ENTRYPOINT ["/entrypoint"]
 
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
 
-#CMD ["/entrypoint"]
-
-ENTRYPOINT ["/entrypoint"]
-
-#CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
