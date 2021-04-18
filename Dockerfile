@@ -59,10 +59,10 @@ RUN chown -R 1000.1000 /var/www/rutorrent && \
 
 COPY root /
 
-USER 1000
-
 VOLUME /socket
 VOLUME /var/www/rutorrent/share
+
+USER 1000
 
 EXPOSE 8890:80
 
