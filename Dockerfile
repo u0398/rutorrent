@@ -52,8 +52,10 @@ RUN set -xe && \
     rm -rf /var/www/rutorrent/.git* && \
     rm /etc/nginx/conf.d/default.conf
 
-RUN chown -R 1000.1000 \
-  /var/www/rutorrent /run /var/lib/nginx /var/log/nginx
+RUN chown -R 1000.1000 /var/www/rutorrent && \
+    chown -R 1000.1000 /run && \
+    chown -R 1000.1000 /var/lib/nginx && \
+    chown -R 1000.1000 /var/log/nginx
 
 COPY root /
 
