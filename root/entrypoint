@@ -4,10 +4,9 @@ set -e
 
 [[ "$DEBUG" == "true" ]] && set -x
 
-
 addgroup -g ${PGID:-1000} rutorrent && adduser -h / -s /bin/sh -G rutorrent -D -u ${PUID:-1000} rutorrent
 
 chown -R rutorrent:rutorrent \
-  /run /var/lib/nginx /var/log/nginx /var/www /var/www/rutorrent/share
+  /run /var/lib/nginx /var/log/nginx /var/www/rutorrent
 
-su rutorrent --command " /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf"
+su rutorrent -c " /usr/bin/supervisord -c /etc/supervisor.d/conf.d/supervisord.conf"
