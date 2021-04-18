@@ -52,6 +52,9 @@ RUN set -xe && \
     rm -rf /var/www/rutorrent/.git* && \
     rm /etc/nginx/conf.d/default.conf
 
+RUN chown -R 1000.1000 \
+  /var/www/html /run /var/lib/nginx /var/log/nginx
+
 COPY root /
 
 USER 1000
