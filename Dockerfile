@@ -9,6 +9,7 @@ ARG VERSION=3.10
 RUN set -xe && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
+    apk update && \
     apk --no-cache add \
       --virtual .debug-deps \
       bash \
