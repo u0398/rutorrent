@@ -66,7 +66,7 @@ USER 1000
 
 EXPOSE 8890:80
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/conf.d/supervisord.conf"]
 
 #ENTRYPOINT ["/entrypoint"]
 
