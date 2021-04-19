@@ -3,8 +3,8 @@ LABEL maintainer="u0398 <u0398@gmail.com>"
 
 ARG VERSION=3.10
 
-#ENV PUID \
-#    PGID
+ENV UID=1000 \
+    GID=1000
 
 RUN set -xe && \
     rm -rf /var/cache/apk/* && \
@@ -15,28 +15,18 @@ RUN set -xe && \
       bash \
       coreutils \
       grep \
-      sed && \
+      sed \
+      less \
+      nano && \
     apk --no-cache add \
       --virtual .run-deps \
-      php8 \
-      php8-fpm \
-      php8-opcache \
-      php8-mysqli \
-      php8-json \
-      php8-openssl \
-      php8-curl \
-      php8-zlib \
-      php8-xml \
-      php8-phar \
-      php8-intl \
-      php8-dom \
-      php8-xmlreader \
-      php8-ctype \
-      php8-session \
-      php8-mbstring \
-      php8-gd \
-      nginx \
+      libtorrent \
+      rtorrent \
       xmlrpc-c \
+      nginx \
+      php7 \
+      php7-fpm \
+      php7-json \
       supervisor && \
     apk add --no-cache \
       --virtual .plug-deps \
@@ -47,38 +37,28 @@ RUN set -xe && \
       sox \
       unrar \
       unzip \
-      zip && \
-    apk --no-cache add \
-      tar && \
+      zip \
+      tar \
+      gzip && \
     mkdir /tmp/rutorrent && \
     cd /tmp/rutorrent && \
     curl -sSL https://github.com/Novik/ruTorrent/archive/v${VERSION}.tar.gz | tar xz --strip 1 && \
     cd / && \
     mv /tmp/rutorrent /var/www/rutorrent && \
-    apk del tar && \
     rm -rf /var/www/rutorrent/.git* && \
     rm /etc/nginx/conf.d/default.conf
 
-#RUN chown -R 1000.1000 /var/www/rutorrent && \
-#    chown -R 1000.1000 /run && \
-#    chown -R 1000.1000 /var/lib/nginx && \
-#    chown -R 1000.1000 /var/log/nginx
+RUN chown -R 1000.1000 /var/www && \
+    chown -R 1000.1000 /run && \
+    chown -R 1000.1000 /var/lib/nginx && \
+    chown -R 1000.1000 /var/log/nginx
 
 COPY root /
 
-VOLUME /socket
+VOLUME /data
 VOLUME /var/www/rutorrent/share
 
-#USER 1000
-
-EXPOSE 8890:80
-
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/conf.d/supervisord.conf"]
+EXPOSE 80:55000
 
 ENTRYPOINT ["/entrypoint"]
-
-#HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8890/fpm-ping
-
-#logfile=/dev/null
-#logfile_maxbytes=0
 

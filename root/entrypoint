@@ -4,12 +4,19 @@ set -e
 
 [[ "$DEBUG" == "true" ]] && set -x
 
-addgroup -g ${PGID:-1000} rutorrent && adduser -h / -s /bin/sh -G rutorrent -D -u ${PUID:-1000} rutorrent
+addgroup -g ${GID} torrent && adduser -h /data -s /bin/sh -G torrent -D -u ${UID} torrent
+mkdir -p /data/torrents /data/torrents/complete /data/.watch /data/.session /var/tmp/nginx
 
-mkdir /var/log/supervisor
-mkdir /var/run/supervisor
+[[ -f /data/.rtorrent.rc ]] || cp /etc/rtorrent.rc /data/.rtorrent.rc
+[[ -f /data/scgi.socket ]] || touch /data/scgi.socket
+[[ -f /data/.session/rtorrent.lock ]] && rm -f /data/.session/rtorrent.lock
 
-chown -R rutorrent:rutorrent \
-  /run /var/lib/nginx /var/log/nginx /var/log/supervisor /var/run/supervisor /var/www/rutorrent
+chown -R torrent:torrent /data
+chown -R torrent:torrent /var/www
+chown -R torrent:torrent /var/lib/nginx
+chown -R torrent:torrent /var/tmp/nginx
 
-su rutorrent -c " /usr/bin/supervisord -c /etc/supervisor.d/conf.d/supervisord.conf"
+chown -R torrent:torrent \
+  /data /var/lib/nginx /var/tmp/nginx /var/www
+
+/usr/bin/supervisord -c /etc/supervisord.conf

@@ -20,10 +20,10 @@
 	$log_file = '/tmp/errors.log';
 	$saveUploadedTorrents = true;
 	$overwriteUploadedTorrents = false;
-	$topDirectory = '/data/torrents';
+	$topDirectory = '/torrents';
 	$forbidUserSettings = false;
 	$scgi_port = 0;
-	$scgi_host = "unix:///socket/rtorrent.sock";
+  $scgi_host = "unix:///data/scgi.socket";
 	$XMLRPCMountPoint = "/RPC2";
 	$pathToExternals = array(
 		"php" 	=> '/usr/bin/php',
