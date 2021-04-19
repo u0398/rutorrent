@@ -14,4 +14,4 @@ mkdir -p /data/torrents /data/torrents/complete /data/.watch /data/.session /var
 chown -R torrent:torrent \
   /data /var/lib/nginx /var/tmp/nginx /var/www
 
-/usr/bin/supervisord -c /etc/supervisord.conf
+/usr/bin/supervisord -c /etc/supervisor.d/supervisord.ini
