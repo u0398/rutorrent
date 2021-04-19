@@ -11,11 +11,6 @@ mkdir -p /data/torrents /data/torrents/complete /data/.watch /data/.session /var
 [[ -f /data/scgi.socket ]] || touch /data/scgi.socket
 [[ -f /data/.session/rtorrent.lock ]] && rm -f /data/.session/rtorrent.lock
 
-chown -R torrent:torrent /data
-chown -R torrent:torrent /var/www
-chown -R torrent:torrent /var/lib/nginx
-chown -R torrent:torrent /var/tmp/nginx
-
 chown -R torrent:torrent \
   /data /var/lib/nginx /var/tmp/nginx /var/www
 
