@@ -6,7 +6,10 @@ set -e
 
 addgroup -g ${PGID:-1000} rutorrent && adduser -h / -s /bin/sh -G rutorrent -D -u ${PUID:-1000} rutorrent
 
+mkdir /var/log/supervisor
+mkdir /var/run/supervisor
+
 chown -R rutorrent:rutorrent \
-  /run /var/lib/nginx /var/log/nginx /var/www/rutorrent
+  /run /var/lib/nginx /var/log/nginx /var/log/supervisor /var/run/supervisor /var/www/rutorrent
 
 su rutorrent -c " /usr/bin/supervisord -c /etc/supervisor.d/conf.d/supervisord.conf"
